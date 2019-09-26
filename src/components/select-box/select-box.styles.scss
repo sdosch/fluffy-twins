@@ -1,0 +1,26 @@
+.select {
+  display: flex;
+  justify-content: center;
+  label {
+    box-sizing: border-box;
+    padding: 10px 20px;
+    line-height: 30px;
+    margin-bottom: 30px;
+    font-size: 18px;
+    border-radius: 10px 0 0 10px;
+    background-color: #1e5799;
+    color: white;
+  }
+  select {
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+    padding: 10px;
+    line-height: 30px;
+    margin-bottom: 30px;
+    font-size: 18px;
+    border-radius: 0 10px 10px 0;
+    background-color: #0ccac4;
+    color: white;
+  }
+}
