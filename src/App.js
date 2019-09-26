@@ -26,7 +26,9 @@ class App extends Component {
         }
       ],
       selectedBoard: {},
-      cards: []
+      lockedBoard: false,
+      cards: [],
+      selectedCards: []
     };
   }
 
@@ -77,10 +79,39 @@ class App extends Component {
   }
 
   handleClick = card => {
-    console.log(card.id);
+    if (!this.state.lockedBoard) {
+      const cards = this.state.cards.slice();
+      cards[card.id].flipped = true;
+      cards[card.id].locked = true;
+      this.setState({ cards: cards });
+
+      const selectedCards = this.state.selectedCards.slice();
+      selectedCards.push(card);
+      if (selectedCards.length === 2) {
+        this.setState({ lockedBoard: true });
+        setTimeout(() => {
+          this.checkMatch(selectedCards);
+        }, 1000);
+      } else {
+        this.setState({ selectedCards: selectedCards });
+      }
+    }
+  };
+
+  checkMatch = selectedCards => {
     const cards = this.state.cards.slice();
-    cards[card.id].flipped = !cards[card.id].flipped;
-    this.setState({ cards: cards });
+    if (selectedCards[0].hash !== selectedCards[1].hash) {
+      cards[selectedCards[0].id].flipped = false;
+      cards[selectedCards[1].id].flipped = false;
+      cards[selectedCards[0].id].locked = false;
+      cards[selectedCards[1].id].locked = false;
+    }
+    selectedCards = [];
+    this.setState({
+      cards: cards,
+      selectedCards: selectedCards,
+      lockedBoard: false
+    });
   };
 
   render() {

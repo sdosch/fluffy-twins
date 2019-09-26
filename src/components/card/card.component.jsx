@@ -3,13 +3,10 @@ import "./card.styles.scss";
 import pawprint from "../../assets/pawprint.svg";
 
 class Card extends Component {
-  flip = () => {
-    this.setState({ flipped: !this.state.flipped });
-  };
   render() {
     return (
       <div
-        onClick={() => this.props.onClick()}
+        onClick={this.props.locked ? null : () => this.props.onClick()}
         className={this.props.flipped ? "flip-card flipped" : "flip-card"}
         style={{
           width: `calc(98vw / ${this.props.size})`,
