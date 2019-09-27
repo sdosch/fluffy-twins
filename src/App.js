@@ -1,14 +1,28 @@
 import React, { Component } from "react";
 import "./App.scss";
-import { Board } from "./components/board/board.component";
-import SelectBox from "./components/select-box/select-box-component";
 import { Tween, Timeline, SplitLetters } from "react-gsap";
+import { Board } from "./components/board/board.component";
+import { TextBox } from "./components/text-box/text-box.component";
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      colors: [
+        "#8dd3c7",
+        "#ffffb3",
+        "#bebada",
+        "#fb8072",
+        "#80b1d3",
+        "#fdb462",
+        "#b3de69",
+        "#fccde5",
+        "#d9d9d9",
+        "#bc80bd",
+        "#ccebc5",
+        "#ffed6f"
+      ],
       boards: [
         {
           name: "small",
@@ -26,14 +40,16 @@ class App extends Component {
           rows: 6
         }
       ],
-      selectedBoard: {},
       lockedBoard: false,
+      textBoxText: "",
+      textBoxImage: "",
       cards: [],
       selectedCards: [],
       matchCount: 0,
       luckyMatchCount: 0,
       flopCount: 0,
-      stupidCount: 0
+      stupidCount: 0,
+      currentLevel: 0
     };
   }
 
@@ -45,44 +61,36 @@ class App extends Component {
     return a;
   };
 
-  handleSelectBox = selected => {
-    this.initGame(selected);
-  };
-
-  initGame = name => {
-    this.setState(
-      { selectedBoard: this.state.boards.find(board => board.name === name) },
-      () => {
-        let cats = [];
-        for (
-          let i = 0;
-          i <
-          Math.floor(
-            (this.state.selectedBoard.cols * this.state.selectedBoard.rows) / 2
-          );
-          i++
-        ) {
-          cats.push({
-            hash: Math.random()
-              .toString(36)
-              .substr(2, 5)
-          });
-        }
-        const cards = this.shuffle([...cats, ...cats]).map((cat, index) => ({
-          id: index,
-          hash: cat.hash,
-          flipped: false,
-          locked: false,
-          flipCount: 0
-        }));
-        this.setState({ cards: cards });
-        console.log("Ready? Choose a card and find a match!");
-      }
-    );
+  initGame = currentLevel => {
+    let cats = [];
+    let board = this.state.boards[currentLevel];
+    for (let i = 0; i < Math.floor((board.cols * board.rows) / 2); i++) {
+      cats.push({
+        hash: Math.random()
+          .toString(36)
+          .substr(2, 5)
+      });
+    }
+    const cards = this.shuffle([...cats, ...cats]).map((cat, index) => ({
+      id: index,
+      hash: cat.hash,
+      flipped: false,
+      locked: false,
+      flipCount: 0
+    }));
+    this.setState({
+      currentLevel: currentLevel,
+      cards: cards,
+      textBoxImage: cards[0].hash,
+      textBoxText: "Ready? Find a match!",
+      matchCount: 0,
+      lockedBoard: false,
+      selectedCards: []
+    });
   };
 
   componentDidMount() {
-    this.initGame(this.state.boards[0].name);
+    this.initGame(0);
   }
 
   handleClick = card => {
@@ -95,81 +103,41 @@ class App extends Component {
 
       const selectedCards = this.state.selectedCards.slice();
       selectedCards.push(card);
+      this.setState({ selectedCards: selectedCards });
       if (selectedCards.length === 2) {
         this.setState({ lockedBoard: true });
-        setTimeout(() => {
-          this.checkMatch(selectedCards);
-        }, 1000);
-      } else {
-        this.setState({ selectedCards: selectedCards });
+        this.checkWin(cards);
       }
     }
   };
 
-  rainbow = colorSet => {
-    // 30 random hues with step of 12 degrees
-    const colors = {
-      rainbow: ["red", "orange", "yellow", "green", "blue", "purple"],
-      qual: [
-        "#8dd3c7",
-        "#ffffb3",
-        "#bebada",
-        "#fb8072",
-        "#80b1d3",
-        "#fdb462",
-        "#b3de69",
-        "#fccde5",
-        "#d9d9d9",
-        "#bc80bd",
-        "#ccebc5",
-        "#ffed6f"
-      ],
-      quant: [
-        "#fff7ec",
-        "#fee8c8",
-        "#fdd49e",
-        "#fdbb84",
-        "#fc8d59",
-        "#ef6548",
-        "#d7301f",
-        "#b30000",
-        "#7f0000"
-      ],
-      div: [
-        "#67001f",
-        "#b2182b",
-        "#d6604d",
-        "#f4a582",
-        "#fddbc7",
-        "#f7f7f7",
-        "#d1e5f0",
-        "#92c5de",
-        "#4393c3",
-        "#2166ac",
-        "#053061"
-      ]
-    };
-
-    const color = colors[colorSet];
-
-    return color[(Math.random() * color.length) | 0];
+  checkWin = cards => {
+    const matchCount = this.state.matchCount + 2;
+    if (matchCount === cards.length) {
+      this.setState({
+        textBoxText: "You did it hey!"
+      });
+      setTimeout(() => {
+        this.initGame(this.state.currentLevel + 1);
+      }, 3000);
+    } else {
+      setTimeout(() => {
+        this.checkMatch(this.state.selectedCards);
+      }, 1000);
+    }
   };
 
   checkMatch = selectedCards => {
     const cards = this.state.cards.slice();
+    let matchCount = this.state.matchCount;
+    let textBoxText = "";
     if (selectedCards[0].hash === selectedCards[1].hash) {
-      const matchCount = this.state.matchCount + 2;
-      if (matchCount === cards.length) {
-        console.log("You did it hey!");
-        this.setState({ matchCount: 0 });
+      matchCount += 2;
+      //lucky match?
+      if (selectedCards[1].flipCount === 1) {
+        textBoxText = "lucky match!";
       } else {
-        this.setState({ matchCount: matchCount });
-        //lucky match?
-        if (selectedCards[1].flipCount === 1) {
-          console.log("lucky match!");
-        } else {
-          console.log("Yay! a match!");
-        }
+        textBoxText = "Yay! a match!";
       }
     } else {
       cards[selectedCards[0].id].flipped = false;
@@ -183,17 +151,18 @@ class App extends Component {
         1
       );
       if (selectedCards[0].flipCount > 1 && selectedCards[1].flipCount > 1) {
-        console.log("now that was pretty stupid!");
+        textBoxText = "now that was pretty stupid!";
       } else if (match[0].flipCount > 0) {
-        console.log("you should have known!");
+        textBoxText = "you should have known!";
       } else {
-        console.log("go on explore...");
+        textBoxText = "go on explore...";
       }
     }
     selectedCards = [];
     this.setState({
-      cards: cards,
+      textBoxText: textBoxText,
       selectedCards: selectedCards,
+      matchCount: matchCount,
       lockedBoard: false
     });
   };
@@ -221,19 +190,18 @@ class App extends Component {
             stagger={0.1}
             duration={0.2}
             cycle={{
-              color: ["red", "orange", "yellow", "green", "blue", "purple"]
+              color: this.state.colors
             }}
           />
         </Timeline>
 
-        <SelectBox
-          id="selectbox"
-          options={this.state.boards}
-          onSelectChange={this.handleSelectBox}
+        <TextBox
+          text={this.state.textBoxText}
+          image={this.state.textBoxImage}
         />
         <Board
+          size={this.state.boards[this.state.currentLevel].cols}
           cards={this.state.cards}
-          size={Math.ceil(this.state.selectedBoard.cols)}
           onClick={card => this.handleClick(card)}
         />
       </div>
