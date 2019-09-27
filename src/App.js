@@ -11,8 +11,8 @@ class App extends Component {
       boards: [
         {
           name: "small",
-          cols: 3,
-          rows: 3
+          cols: 2,
+          rows: 2
         },
         {
           name: "medium",
