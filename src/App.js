@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.scss";
 import { Board } from "./components/board/board.component";
 import SelectBox from "./components/select-box/select-box-component";
+import { Tween, Timeline, SplitLetters } from "react-gsap";
 
 class App extends Component {
   constructor(props) {
@@ -105,6 +106,55 @@ class App extends Component {
     }
   };
 
+  rainbow = colorSet => {
+    // 30 random hues with step of 12 degrees
+    const colors = {
+      rainbow: ["red", "orange", "yellow", "green", "blue", "purple"],
+      qual: [
+        "#8dd3c7",
+        "#ffffb3",
+        "#bebada",
+        "#fb8072",
+        "#80b1d3",
+        "#fdb462",
+        "#b3de69",
+        "#fccde5",
+        "#d9d9d9",
+        "#bc80bd",
+        "#ccebc5",
+        "#ffed6f"
+      ],
+      quant: [
+        "#fff7ec",
+        "#fee8c8",
+        "#fdd49e",
+        "#fdbb84",
+        "#fc8d59",
+        "#ef6548",
+        "#d7301f",
+        "#b30000",
+        "#7f0000"
+      ],
+      div: [
+        "#67001f",
+        "#b2182b",
+        "#d6604d",
+        "#f4a582",
+        "#fddbc7",
+        "#f7f7f7",
+        "#d1e5f0",
+        "#92c5de",
+        "#4393c3",
+        "#2166ac",
+        "#053061"
+      ]
+    };
+
+    const color = colors[colorSet];
+
+    return color[(Math.random() * color.length) | 0];
+  };
+
   checkMatch = selectedCards => {
     const cards = this.state.cards.slice();
     if (selectedCards[0].hash === selectedCards[1].hash) {
@@ -151,7 +201,30 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Fluffy Twins</h1>
+        <Timeline
+          target={
+            <SplitLetters>
+              <h1>Fluffy Twins</h1>
+            </SplitLetters>
+          }
+        >
+          <Tween
+            staggerFrom={{ y: "-=200px", scale: 1, color: "#0ccac4" }}
+            staggerTo={{ y: "0px", scale: 1, color: "#0ccac4" }}
+            stagger={0.1}
+            duration={2}
+            ease="Bounce.easeOut"
+          />
+          <Tween
+            staggerFrom={{ scale: 1.5, color: "white" }}
+            staggerTo={{ scale: 1 }}
+            stagger={0.1}
+            duration={0.2}
+            cycle={{
+              color: ["red", "orange", "yellow", "green", "blue", "purple"]
+            }}
+          />
+        </Timeline>
 
         <SelectBox
           id="selectbox"
