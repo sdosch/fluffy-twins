@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/fluffy-twins/precache-manifest.9f028728b43fca5eb5271cf34ba3cc9a.js"
+  "/fluffy-twins/precache-manifest.b35445a37153cae87663c33aad220516.js"
 );
 
 self.addEventListener('message', (event) => {
