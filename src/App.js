@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.scss";
-import Board from "./components/board/board.component";
+import { Board } from "./components/board/board.component";
 import SelectBox from "./components/select-box/select-box-component";
 
 class App extends Component {
