@@ -151,7 +151,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Fluffy Twins</h1>
+        <h1>Fluffy Twinz</h1>
 
         <SelectBox
           id="selectbox"
