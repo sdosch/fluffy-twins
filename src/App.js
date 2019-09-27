@@ -28,7 +28,11 @@ class App extends Component {
       selectedBoard: {},
       lockedBoard: false,
       cards: [],
-      selectedCards: []
+      selectedCards: [],
+      matchCount: 0,
+      luckyMatchCount: 0,
+      flopCount: 0,
+      stupidCount: 0
     };
   }
 
@@ -67,9 +71,11 @@ class App extends Component {
           id: index,
           hash: cat.hash,
           flipped: false,
-          locked: false
+          locked: false,
+          flipCount: 0
         }));
         this.setState({ cards: cards });
+        console.log("Ready? Choose a card and find a match!");
       }
     );
   };
@@ -83,6 +89,7 @@ class App extends Component {
       const cards = this.state.cards.slice();
       cards[card.id].flipped = true;
       cards[card.id].locked = true;
+      cards[card.id].flipCount++;
       this.setState({ cards: cards });
 
       const selectedCards = this.state.selectedCards.slice();
@@ -100,11 +107,38 @@ class App extends Component {
 
   checkMatch = selectedCards => {
     const cards = this.state.cards.slice();
-    if (selectedCards[0].hash !== selectedCards[1].hash) {
+    if (selectedCards[0].hash === selectedCards[1].hash) {
+      const matchCount = this.state.matchCount + 2;
+      if (matchCount === cards.length) {
+        console.log("You did it hey!");
+        this.setState({ matchCount: 0 });
+      } else {
+        this.setState({ matchCount: matchCount });
+        //lucky match?
+        if (selectedCards[1].flipCount === 1) {
+          console.log("lucky match!");
+        } else {
+          console.log("Yay! a match!");
+        }
+      }
+    } else {
       cards[selectedCards[0].id].flipped = false;
       cards[selectedCards[1].id].flipped = false;
       cards[selectedCards[0].id].locked = false;
       cards[selectedCards[1].id].locked = false;
+      //flop? player has seen the corresponing card before...
+      let match = cards.filter(card => card.hash === selectedCards[0].hash);
+      match.splice(
+        selectedCards.findIndex(card => card.id === selectedCards[0].id),
+        1
+      );
+      if (selectedCards[0].flipCount > 1 && selectedCards[1].flipCount > 1) {
+        console.log("now that was pretty stupid!");
+      } else if (match[0].flipCount > 0) {
+        console.log("you should have known!");
+      } else {
+        console.log("go on explore...");
+      }
     }
     selectedCards = [];
     this.setState({
