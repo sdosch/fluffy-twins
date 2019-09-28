@@ -1,7 +1,7 @@
 .text-box {
   position: relative;
   background-color: white;
-  padding: 6vw;
+  padding: 3vw;
   margin: 1.5vw;
   border-radius: 2vw;
   margin-top: 60px;
@@ -28,5 +28,13 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 16vw;
+    span {
+      font-size: 12vw;
+      margin: 0 1vw;
+    }
   }
 }

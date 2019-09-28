@@ -3,6 +3,7 @@ import "./App.scss";
 import { Tween, Timeline, SplitLetters } from "react-gsap";
 import { Board } from "./components/board/board.component";
 import { TextBox } from "./components/text-box/text-box.component";
+import { Modal } from "./components/modal/modal.component";
 
 class App extends Component {
   constructor(props) {
@@ -49,9 +50,82 @@ class App extends Component {
       luckyMatchCount: 0,
       flopCount: 0,
       stupidCount: 0,
-      currentLevel: 0
+      currentLevel: 0,
+      showModal: false,
+      responseStart: [
+        "<span>😺</span> can you find a match?",
+        "<span>😸</span> but can you also solve this?",
+        "<span>😼</span> here's the final challenge!"
+      ],
+      responseWin: [
+        "<span>😻</span> well done!",
+        "<span>😻</span> very good! one more, ok?",
+        "<span>😻</span> you did them all!!!"
+      ],
+      responseFoundMe: [
+        "<span>👇🏻</span>hey, that's me <span>❤️</span>",
+        "hee <span>❤️</span>",
+        "hello again <span>❤️</span>",
+        "i love you too! <span>❤️</span>",
+        "<span>❤️</span>"
+      ],
+      responseSeenBefore: [
+        "<span>😺</span> 3rd try on this card",
+        "<span>😾</span> 5th try on this card!",
+        "<span>🙀</span> no match after 9 tries!!!"
+      ],
+      responseMatch: [
+        "yup <span>👍🏻</span>",
+        "<span>💅🏻</span> and that's a match!",
+        "<span>😎😎😎</span>",
+        "<span>🤘🏻🤘🏻</span>rock'n'roll <span>🤘🏻🤘🏻</span>",
+        "<span>😲</span> you are so gooood!",
+        "<span>🥳</span> got it just right! <span>🥳</span>",
+        "you knew it <span>😜</span>",
+        "jawoll! <span>✊🏻</span>"
+      ],
+      responseLuckyMatch: [
+        "️️<span>🍀</span> lucky match!!! <span>🍀</span>",
+        "<span>🍻</span> cheerio!!!",
+        "<span>🦄</span> You are so lucky!!! <span>🌈</span>",
+        "⭐<span>⭐</span>⭐<span>⭐</span>⭐<span>⭐</span>⭐",
+        "<span>🔔</span> BINGO <span>🔔</span>",
+        "<span>💁🏼</span> exactly!!!",
+        "<span>💁🏼</span> tadaa!!!"
+      ],
+      responseNoMatch: [
+        "<span>☝🏼</span> fun fact: that was a cat.",
+        "<span>🤷🏼‍</span> no we don't look alike.",
+        "<span>👬</span> no were not twins.",
+        "<span>🐯</span> a cat, but wrong one.",
+        "<span>🌧</span> sorry, no match.",
+        "<span>🙇🏻‍</span> no match this time."
+      ],
+      responseFlopMatch: [
+        "<span>🥺</span> close - but wrong",
+        "<span>🧐</span> seen that before.",
+        "<span>🙄</span> well keep on guessing...",
+        "<span>😓</span> no look somewhere else.",
+        "<span>🤞🏼</span> better luck next time."
+      ],
+      responseStupidMatch: [
+        "<span>😂</span> hahaha... no.",
+        "<span>🤢</span>",
+        "<span>🤯</span>",
+        "<span>🤦🏻‍</span>OMG",
+        "🧟‍<span>🧟‍</span> NOOooo! <span>🧟‍</span>🧟‍",
+        "<span>🙈</span>emm... no."
+      ]
     };
   }
+
+  showModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  hideModal = () => {
+    this.setState({ showModal: false });
+  };
 
   shuffle = a => {
     for (let i = a.length - 1; i > 0; i--) {
@@ -82,7 +156,7 @@ class App extends Component {
       currentLevel: currentLevel,
       cards: cards,
       textBoxImage: cards[0].hash,
-      textBoxText: "Ready? Find a match!",
+      textBoxText: this.state.responseStart[currentLevel],
       matchCount: 0,
       lockedBoard: false,
       selectedCards: []
@@ -101,6 +175,39 @@ class App extends Component {
       cards[card.id].flipCount++;
       this.setState({ cards: cards });
 
+      let match = cards.filter(otherMe => card.hash === otherMe.hash);
+
+      //found me/other me
+      if (card.id === 0 || cards[0].hash === match[1].hash) {
+        this.setState({
+          textBoxText:
+            card.flipCount < this.state.responseFoundMe.length
+              ? this.state.responseFoundMe[card.flipCount - 1]
+              : this.state.responseFoundMe[
+                  this.state.responseFoundMe.length - 1
+                ]
+        });
+      }
+      // seen before
+      switch (card.flipCount) {
+        case 3:
+          this.setState({
+            textBoxText: this.state.responseSeenBefore[0]
+          });
+          break;
+        case 5:
+          this.setState({
+            textBoxText: this.state.responseSeenBefore[1]
+          });
+          break;
+        case 10:
+          this.setState({
+            textBoxText: this.state.responseSeenBefore[2]
+          });
+          break;
+        default:
+      }
+
       const selectedCards = this.state.selectedCards.slice();
       selectedCards.push(card);
       this.setState({ selectedCards: selectedCards });
@@ -115,7 +222,7 @@ class App extends Component {
     const matchCount = this.state.matchCount + 2;
     if (matchCount === cards.length) {
       this.setState({
-        textBoxText: "You did it hey!"
+        textBoxText: this.state.responseWin[this.state.currentLevel]
       });
       setTimeout(() => {
         this.initGame(this.state.currentLevel + 1);
@@ -127,6 +234,11 @@ class App extends Component {
     }
   };
 
+  textResponse = responseObject => {
+    const response = this.shuffle(responseObject);
+    return response[0];
+  };
+
   checkMatch = selectedCards => {
     const cards = this.state.cards.slice();
     let matchCount = this.state.matchCount;
@@ -135,9 +247,9 @@ class App extends Component {
       matchCount += 2;
       //lucky match?
       if (selectedCards[1].flipCount === 1) {
-        textBoxText = "lucky match!";
+        textBoxText = this.textResponse(this.state.responseLuckyMatch);
       } else {
-        textBoxText = "Yay! a match!";
+        textBoxText = this.textResponse(this.state.responseMatch);
       }
     } else {
       cards[selectedCards[0].id].flipped = false;
@@ -151,11 +263,11 @@ class App extends Component {
         1
       );
       if (selectedCards[0].flipCount > 1 && selectedCards[1].flipCount > 1) {
-        textBoxText = "now that was pretty stupid!";
+        textBoxText = this.textResponse(this.state.responseStupidMatch);
       } else if (match[0].flipCount > 0) {
-        textBoxText = "you should have known!";
+        textBoxText = this.textResponse(this.state.responseFlopMatch);
       } else {
-        textBoxText = "go on explore...";
+        textBoxText = this.textResponse(this.state.responseNoMatch);
       }
     }
     selectedCards = [];
@@ -204,6 +316,7 @@ class App extends Component {
           cards={this.state.cards}
           onClick={card => this.handleClick(card)}
         />
+        <Modal show={this.state.showModal} />
       </div>
     );
   }
