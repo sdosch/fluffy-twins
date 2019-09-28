@@ -115,6 +115,58 @@ class App extends Component {
         "<span>🤦🏻‍</span>OMG",
         "🧟‍<span>🧟‍</span> NOOooo! <span>🧟‍</span>🧟‍",
         "<span>🙈</span>emm... no."
+      ],
+      ranks: [
+        {
+          emoji: "🧠",
+          title: "undefeatable mastermind",
+          subtitle: "i'm a bot - or a kid, or just super super smart"
+        },
+        {
+          emoji: "👑",
+          title: "king of the castle",
+          subtitle: "bitch, i'm a king!"
+        },
+        {
+          emoji: "👨🏻‍✈️",
+          title: "compelled pilot",
+          subtitle: "trust me, im a pilot"
+        },
+        {
+          emoji: "🦊",
+          title: "seroius fox",
+          subtitle: "im fucking serious"
+        },
+        {
+          emoji: "🎩",
+          title: "like a sir",
+          subtitle: "it's my pleasure"
+        },
+        {
+          emoji: "🤹🏻‍",
+          title: "like a clown",
+          subtitle: "entertainment is my business"
+        },
+        {
+          emoji: "🐙",
+          title: "pitiful octopus",
+          subtitle: "i hug ships too hard"
+        },
+        {
+          emoji: "🤯",
+          title: "wretched brain",
+          subtitle: "my brain when i try to remember anyting important"
+        },
+        {
+          emoji: "🥴",
+          title: "drunken master",
+          subtitle: "it took a while but heeeey, i maaade it"
+        },
+        {
+          emoji: "🧟‍",
+          title: "desparate zombie",
+          subtitle: "neeed braaain... neeeed braaaain!1!1!"
+        }
       ]
     };
   }
@@ -124,7 +176,7 @@ class App extends Component {
   };
 
   hideModal = () => {
-    this.setState({ showModal: false });
+    this.initGame(0);
   };
 
   shuffle = a => {
@@ -159,12 +211,14 @@ class App extends Component {
       textBoxText: this.state.responseStart[currentLevel],
       matchCount: 0,
       lockedBoard: false,
-      selectedCards: []
+      selectedCards: [],
+      showModal: false
     });
   };
 
   componentDidMount() {
-    this.initGame(0);
+    //this.initGame(0);
+    this.showModal();
   }
 
   handleClick = card => {
@@ -225,7 +279,8 @@ class App extends Component {
         textBoxText: this.state.responseWin[this.state.currentLevel]
       });
       setTimeout(() => {
-        this.initGame(this.state.currentLevel + 1);
+        //this.initGame(this.state.currentLevel + 1);
+        this.showModal();
       }, 3000);
     } else {
       setTimeout(() => {
@@ -248,6 +303,8 @@ class App extends Component {
       //lucky match?
       if (selectedCards[1].flipCount === 1) {
         textBoxText = this.textResponse(this.state.responseLuckyMatch);
+        const luckyMatchCount = this.state.luckyMatchCount + 1;
+        this.setState({ luckyMatchCount: luckyMatchCount });
       } else {
         textBoxText = this.textResponse(this.state.responseMatch);
       }
@@ -256,16 +313,25 @@ class App extends Component {
       cards[selectedCards[1].id].flipped = false;
       cards[selectedCards[0].id].locked = false;
       cards[selectedCards[1].id].locked = false;
-      //flop? player has seen the corresponing card before...
+
       let match = cards.filter(card => card.hash === selectedCards[0].hash);
       match.splice(
         selectedCards.findIndex(card => card.id === selectedCards[0].id),
         1
       );
-      if (selectedCards[0].flipCount > 1 && selectedCards[1].flipCount > 1) {
+
+      if (selectedCards[0].flipCount > 3 && selectedCards[1].flipCount > 3) {
+        //stupid? player has seen the card as well as the corresponding card more than three times
         textBoxText = this.textResponse(this.state.responseStupidMatch);
+
+        const stupidCount = this.state.stupidCount + 1;
+        this.setState({ stupidCount: stupidCount });
       } else if (match[0].flipCount > 0) {
+        //flop? player has seen the corresponing card before...
         textBoxText = this.textResponse(this.state.responseFlopMatch);
+
+        const flopCount = this.state.flopCount + 1;
+        this.setState({ flopCount: flopCount });
       } else {
         textBoxText = this.textResponse(this.state.responseNoMatch);
       }
@@ -316,7 +382,13 @@ class App extends Component {
           cards={this.state.cards}
           onClick={card => this.handleClick(card)}
         />
-        <Modal show={this.state.showModal} />
+        <Modal
+          show={this.state.showModal}
+          luckyMatchCount={this.state.luckyMatchCount}
+          flopCount={this.state.flopCount}
+          stupidCount={this.state.stupidCount}
+          onClick={() => this.hideModal()}
+        />
       </div>
     );
   }
