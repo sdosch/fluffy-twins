@@ -39,6 +39,7 @@
       font-size: 8vw;
       font-family: "Roboto Condensed";
       font-style: italic;
+      text-transform: uppercase;
     }
     .badge-container {
       position: relative;
@@ -59,14 +60,14 @@
       .badge {
         position: absolute;
         top: 22vw;
-        padding: 5vw 0 2.5vw 0;
+        padding: 5.5vw 0 2.5vw 0;
         width: 100%;
         background-position: center center;
         background-size: 100%;
         background-repeat: no-repeat;
         color: white;
         font-size: 6vw;
-        font-family: "Roboto Condensed";
+        font-family: "Big Shoulders Text";
         text-transform: uppercase;
       }
     }

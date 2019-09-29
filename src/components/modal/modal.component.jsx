@@ -28,12 +28,12 @@ export const Modal = props => (
       </Timeline>
       <h2>You were awarded the rank</h2>
       <div className="badge-container">
-        <div className="icon">🐼</div>
+        <div className="icon">{props.rank.emoji}</div>
         <div className="badge" style={{ backgroundImage: `url(${banner})` }}>
-          Cat Whisperer
+          {props.rank.title}
         </div>
       </div>
-      <p>"You did well for a human"</p>
+      <p>"{props.rank.subtitle}"</p>
       <ul>
         <li>
           <span role="img" aria-label="birdie">

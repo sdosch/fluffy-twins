@@ -128,14 +128,29 @@ class App extends Component {
           subtitle: "bitch, i'm a king!"
         },
         {
+          emoji: "🦖",
+          title: "godzilla",
+          subtitle: "A God, an alpha predator, Godzilla!"
+        },
+        {
+          emoji: "🐘",
+          title: "dependable elephant",
+          subtitle: "because elephants never forget"
+        },
+        {
           emoji: "👨🏻‍✈️",
           title: "compelled pilot",
           subtitle: "trust me, im a pilot"
         },
         {
+          emoji: "🐁",
+          title: "reliable lab rat",
+          subtitle: "i'm doing it only for the science"
+        },
+        {
           emoji: "🦊",
           title: "seroius fox",
-          subtitle: "im fucking serious"
+          subtitle: "i'm fucking serious"
         },
         {
           emoji: "🎩",
@@ -143,9 +158,9 @@ class App extends Component {
           subtitle: "it's my pleasure"
         },
         {
-          emoji: "🤹🏻‍",
-          title: "like a clown",
-          subtitle: "entertainment is my business"
+          emoji: "🐝",
+          title: "spelling bee",
+          subtitle: "fly like a butterfly, sting like a bee"
         },
         {
           emoji: "🐙",
@@ -153,21 +168,27 @@ class App extends Component {
           subtitle: "i hug ships too hard"
         },
         {
-          emoji: "🤯",
-          title: "wretched brain",
-          subtitle: "my brain when i try to remember anyting important"
+          emoji: "🐔",
+          title: "blind hen",
+          subtitle: "Yes i may occasionally pick up a grain"
         },
         {
-          emoji: "🥴",
-          title: "drunken master",
-          subtitle: "it took a while but heeeey, i maaade it"
+          emoji: "🧻",
+          title: "clueless poop ticket",
+          subtitle: "just rollin with the homies"
+        },
+        {
+          emoji: "💨",
+          title: "cabbage fart",
+          subtitle: "silent but deadly"
         },
         {
           emoji: "🧟‍",
-          title: "desparate zombie",
+          title: "rotten zombie",
           subtitle: "neeed braaain... neeeed braaaain!1!1!"
         }
-      ]
+      ],
+      currentRank: {}
     };
   }
 
@@ -217,8 +238,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    //this.initGame(0);
-    this.showModal();
+    this.initGame(0);
   }
 
   handleClick = card => {
@@ -276,11 +296,16 @@ class App extends Component {
     const matchCount = this.state.matchCount + 2;
     if (matchCount === cards.length) {
       this.setState({
-        textBoxText: this.state.responseWin[this.state.currentLevel]
+        textBoxText: this.state.responseWin[this.state.currentLevel],
+        currentRank: this.getRank()
       });
       setTimeout(() => {
-        //this.initGame(this.state.currentLevel + 1);
-        this.showModal();
+        const currentLevel = this.state.currentLevel + 1;
+        if (currentLevel > this.state.boards.length) {
+          this.showModal();
+        } else {
+          this.initGame(currentLevel);
+        }
       }, 3000);
     } else {
       setTimeout(() => {
@@ -345,6 +370,18 @@ class App extends Component {
     });
   };
 
+  getRank = () => {
+    const mistakes =
+      this.state.flopCount +
+      this.state.stupidCount * 2 -
+      this.state.luckyMatchCount * 2;
+    const handycap = 50;
+    let rank = mistakes - handycap;
+    rank = rank < 0 ? 0 : rank;
+    rank = rank > this.state.ranks.length ? this.state.ranks.length - 1 : rank;
+    return this.state.ranks[rank];
+  };
+
   render() {
     return (
       <div className="App">
@@ -387,6 +424,7 @@ class App extends Component {
           luckyMatchCount={this.state.luckyMatchCount}
           flopCount={this.state.flopCount}
           stupidCount={this.state.stupidCount}
+          rank={this.state.currentRank}
           onClick={() => this.hideModal()}
         />
       </div>
