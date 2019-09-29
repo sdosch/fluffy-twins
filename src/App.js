@@ -82,17 +82,14 @@ class App extends Component {
         "<span>😲</span> you are so gooood!",
         "<span>🥳</span> got it just right! <span>🥳</span>",
         "you knew it <span>😜</span>",
-        "jawoll! <span>✊🏻</span>"
-      ],
-      responseLuckyMatch: [
-        "️️<span>🍀</span> lucky match!!! <span>🍀</span>",
-        "<span>🍻</span> cheerio!!!",
-        "<span>🦄</span> You are so lucky!!! <span>🌈</span>",
-        "⭐<span>⭐</span>⭐<span>⭐</span>⭐<span>⭐</span>⭐",
+        "jawoll! <span>✊🏻</span>",
+        "<span>🍻</span> cheerio!",
+        "<span>🦄</span> You are so lucky.<span>🌈</span>",
         "<span>🔔</span> BINGO <span>🔔</span>",
-        "<span>💁🏼</span> exactly!!!",
-        "<span>💁🏼</span> tadaa!!!"
+        "<span>💁🏼</span> exactly.",
+        "<span>💁🏼</span> tadaa!"
       ],
+      responseLuckyMatch: ["️️<span>🐥</span> BIRDIE!!! <span>🐥</span>"],
       responseNoMatch: [
         "<span>☝🏼</span> fun fact: that was a cat.",
         "<span>🤷🏼‍</span> no we don't look alike.",
@@ -102,10 +99,10 @@ class App extends Component {
         "<span>🙇🏻‍</span> no match this time."
       ],
       responseFlopMatch: [
-        "<span>🥺</span> close - but wrong",
-        "<span>🧐</span> seen that before.",
+        "<span>🥺</span> sorry. wrong.",
+        "<span>🧐</span> seen that one before.",
         "<span>🙄</span> well keep on guessing...",
-        "<span>😓</span> no look somewhere else.",
+        "<span>😓</span> no. no. no!!!",
         "<span>🤞🏼</span> better luck next time."
       ],
       responseStupidMatch: [
@@ -119,67 +116,67 @@ class App extends Component {
       ranks: [
         {
           emoji: "🧠",
-          title: "undefeatable mastermind",
+          title: "Braniac",
           subtitle: "I'm a bot - or a kid, or just super super smart"
         },
         {
           emoji: "👑",
-          title: "king of the castle",
+          title: "King of the castle",
           subtitle: "Bitch, i'm a king!"
         },
         {
           emoji: "🦖",
-          title: "godzilla",
+          title: "Godzilla",
           subtitle: "A God, an alpha predator, Godzilla!"
         },
         {
           emoji: "🐘",
-          title: "dependable elephant",
+          title: "Dependable elephant",
           subtitle: "Because elephants never forget"
         },
         {
           emoji: "👨🏻‍✈️",
-          title: "compelled pilot",
+          title: "Compelled pilot",
           subtitle: "Trust me, im a pilot"
         },
         {
           emoji: "🐁",
-          title: "reliable lab rat",
+          title: "Reliable lab rat",
           subtitle: "I'm doing it only for the science"
         },
         {
           emoji: "🦊",
-          title: "seroius fox",
+          title: "Seroius fox",
           subtitle: "I'm fucking serious"
         },
         {
           emoji: "🎩",
-          title: "like a sir",
+          title: "Like a sir",
           subtitle: "It's my pleasure"
         },
         {
           emoji: "🐝",
-          title: "spelling bee",
+          title: "Busy bee",
           subtitle: "Fly like a butterfly, sting like a bee"
         },
         {
           emoji: "🐙",
-          title: "pitiful octopus",
+          title: "Pitiful octopus",
           subtitle: "I hug ships too hard"
         },
         {
           emoji: "🐔",
-          title: "blind hen",
+          title: "Blind hen",
           subtitle: "Yes i may occasionally pick up a grain"
         },
         {
           emoji: "🧻",
-          title: "clueless poop ticket",
+          title: "Clueless poop ticket",
           subtitle: "Just rollin with the homies"
         },
         {
           emoji: "💨",
-          title: "cabbage fart",
+          title: "Cabbage fart",
           subtitle: "Silent but deadly"
         },
         {
