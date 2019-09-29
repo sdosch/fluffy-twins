@@ -120,12 +120,12 @@ class App extends Component {
         {
           emoji: "🧠",
           title: "undefeatable mastermind",
-          subtitle: "i'm a bot - or a kid, or just super super smart"
+          subtitle: "I'm a bot - or a kid, or just super super smart"
         },
         {
           emoji: "👑",
           title: "king of the castle",
-          subtitle: "bitch, i'm a king!"
+          subtitle: "Bitch, i'm a king!"
         },
         {
           emoji: "🦖",
@@ -135,37 +135,37 @@ class App extends Component {
         {
           emoji: "🐘",
           title: "dependable elephant",
-          subtitle: "because elephants never forget"
+          subtitle: "Because elephants never forget"
         },
         {
           emoji: "👨🏻‍✈️",
           title: "compelled pilot",
-          subtitle: "trust me, im a pilot"
+          subtitle: "Trust me, im a pilot"
         },
         {
           emoji: "🐁",
           title: "reliable lab rat",
-          subtitle: "i'm doing it only for the science"
+          subtitle: "I'm doing it only for the science"
         },
         {
           emoji: "🦊",
           title: "seroius fox",
-          subtitle: "i'm fucking serious"
+          subtitle: "I'm fucking serious"
         },
         {
           emoji: "🎩",
           title: "like a sir",
-          subtitle: "it's my pleasure"
+          subtitle: "It's my pleasure"
         },
         {
           emoji: "🐝",
           title: "spelling bee",
-          subtitle: "fly like a butterfly, sting like a bee"
+          subtitle: "Fly like a butterfly, sting like a bee"
         },
         {
           emoji: "🐙",
           title: "pitiful octopus",
-          subtitle: "i hug ships too hard"
+          subtitle: "I hug ships too hard"
         },
         {
           emoji: "🐔",
@@ -175,16 +175,16 @@ class App extends Component {
         {
           emoji: "🧻",
           title: "clueless poop ticket",
-          subtitle: "just rollin with the homies"
+          subtitle: "Just rollin with the homies"
         },
         {
           emoji: "💨",
           title: "cabbage fart",
-          subtitle: "silent but deadly"
+          subtitle: "Silent but deadly"
         },
         {
           emoji: "🧟‍",
-          title: "rotten zombie",
+          title: "Rotten zombie",
           subtitle: "neeed braaain... neeeed braaaain!1!1!"
         }
       ],
@@ -247,7 +247,7 @@ class App extends Component {
       cards[card.id].flipped = true;
       cards[card.id].locked = true;
       cards[card.id].flipCount++;
-      this.setState({ cards: cards });
+      this.setState({ cards: cards, currentRank: this.getRank() });
 
       let match = cards.filter(otherMe => card.hash === otherMe.hash);
 
@@ -296,12 +296,11 @@ class App extends Component {
     const matchCount = this.state.matchCount + 2;
     if (matchCount === cards.length) {
       this.setState({
-        textBoxText: this.state.responseWin[this.state.currentLevel],
-        currentRank: this.getRank()
+        textBoxText: this.state.responseWin[this.state.currentLevel]
       });
       setTimeout(() => {
         const currentLevel = this.state.currentLevel + 1;
-        if (currentLevel > this.state.boards.length) {
+        if (currentLevel > this.state.boards.length - 1) {
           this.showModal();
         } else {
           this.initGame(currentLevel);
@@ -375,8 +374,8 @@ class App extends Component {
       this.state.flopCount +
       this.state.stupidCount * 2 -
       this.state.luckyMatchCount * 2;
-    const handycap = 50;
-    let rank = mistakes - handycap;
+    const handycap = 100;
+    let rank = Math.floor((mistakes / handycap) * this.state.ranks.length);
     rank = rank < 0 ? 0 : rank;
     rank = rank > this.state.ranks.length ? this.state.ranks.length - 1 : rank;
     return this.state.ranks[rank];
