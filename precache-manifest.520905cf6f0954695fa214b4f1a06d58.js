@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e71540f54d62490e133cbf12587971bb",
+    "revision": "8c11e63feffeb600d939d50d9159d442",
     "url": "/fluffy-twins/index.html"
   },
   {
-    "revision": "cd985106175daa20ffea",
+    "revision": "05063043ad8a6abd578e",
     "url": "/fluffy-twins/static/css/main.8ce2ee61.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/fluffy-twins/static/js/2.7f135f1c.chunk.js"
   },
   {
-    "revision": "cd985106175daa20ffea",
-    "url": "/fluffy-twins/static/js/main.bf9a600a.chunk.js"
+    "revision": "05063043ad8a6abd578e",
+    "url": "/fluffy-twins/static/js/main.b03c614d.chunk.js"
   },
   {
     "revision": "9bb79180e6bd492a0790",
