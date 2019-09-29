@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/fluffy-twins/static/css/main.6ac9cfa8.chunk.css",
-    "main.js": "/fluffy-twins/static/js/main.5092b420.chunk.js",
-    "main.js.map": "/fluffy-twins/static/js/main.5092b420.chunk.js.map",
+    "main.css": "/fluffy-twins/static/css/main.8ce2ee61.chunk.css",
+    "main.js": "/fluffy-twins/static/js/main.bf9a600a.chunk.js",
+    "main.js.map": "/fluffy-twins/static/js/main.bf9a600a.chunk.js.map",
     "runtime-main.js": "/fluffy-twins/static/js/runtime-main.a3df07bd.js",
     "runtime-main.js.map": "/fluffy-twins/static/js/runtime-main.a3df07bd.js.map",
     "static/js/2.7f135f1c.chunk.js": "/fluffy-twins/static/js/2.7f135f1c.chunk.js",
     "static/js/2.7f135f1c.chunk.js.map": "/fluffy-twins/static/js/2.7f135f1c.chunk.js.map",
     "index.html": "/fluffy-twins/index.html",
-    "precache-manifest.743b9d83d912cba8751355b487bd33ff.js": "/fluffy-twins/precache-manifest.743b9d83d912cba8751355b487bd33ff.js",
+    "precache-manifest.89920a07b27a14d4c4e3d8a0c776a6ee.js": "/fluffy-twins/precache-manifest.89920a07b27a14d4c4e3d8a0c776a6ee.js",
     "service-worker.js": "/fluffy-twins/service-worker.js",
-    "static/css/main.6ac9cfa8.chunk.css.map": "/fluffy-twins/static/css/main.6ac9cfa8.chunk.css.map",
+    "static/css/main.8ce2ee61.chunk.css.map": "/fluffy-twins/static/css/main.8ce2ee61.chunk.css.map",
     "static/media/banner.svg": "/fluffy-twins/static/media/banner.8c35c0f1.svg",
     "static/media/pawprint.svg": "/fluffy-twins/static/media/pawprint.5695bb1a.svg"
   }
