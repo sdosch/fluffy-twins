@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "56a7a8b9dba84d6b5a819551ca2b415c",
+    "revision": "e71540f54d62490e133cbf12587971bb",
     "url": "/fluffy-twins/index.html"
   },
   {
