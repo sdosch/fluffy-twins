@@ -122,7 +122,7 @@ class App extends Component {
         {
           emoji: "👑",
           title: "King of the castle",
-          subtitle: "Bitch, i'm a king!"
+          subtitle: "Bitch, I'm a king!"
         },
         {
           emoji: "🦖",
@@ -132,17 +132,17 @@ class App extends Component {
         {
           emoji: "🐘",
           title: "Irrelephant",
-          subtitle: "Because elephants never forget."
+          subtitle: "Because elephants never forget"
         },
         {
           emoji: "🕵🏼",
           title: "Sherlock Holmes",
-          subtitle: "To a great mind, nothing is little."
+          subtitle: "To a great mind, nothing is little"
         },
         {
           emoji: "🧶",
           title: "Cute Kitten",
-          subtitle: "I am doing so well, I should be in the game."
+          subtitle: "I am doing so well, I should be in the game"
         },
         {
           emoji: "🐁",
@@ -165,9 +165,9 @@ class App extends Component {
           subtitle: "Fly like a butterfly, sting like a bee"
         },
         {
-          emoji: "🦉",
-          title: "Midnight hooter",
-          subtitle: "Owl You Need Is Love."
+          emoji: "🥠",
+          title: "Fortune cookie",
+          subtitle: "The fortune you seek is in another cookie"
         },
         {
           emoji: "🤖",
@@ -177,7 +177,7 @@ class App extends Component {
         {
           emoji: "👨🏻‍✈️",
           title: "Kamikaze pilot",
-          subtitle: "Trust me, I'm an aviator."
+          subtitle: "Trust me, I'm an aviator"
         },
         {
           emoji: "🧤",
@@ -192,7 +192,7 @@ class App extends Component {
         {
           emoji: "🥙",
           title: "Badly packed Kebab",
-          subtitle: "Also with something you didn't want."
+          subtitle: "Also with something you didn't want"
         },
         {
           emoji: "🐔",
