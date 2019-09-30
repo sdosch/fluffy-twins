@@ -302,7 +302,7 @@ class App extends Component {
       });
       setTimeout(() => {
         const currentLevel = this.state.currentLevel + 1;
-        if (currentLevel < this.state.boards.length - 1) {
+        if (currentLevel > this.state.boards.length - 1) {
           this.showModal();
         } else {
           this.initGame(currentLevel);
