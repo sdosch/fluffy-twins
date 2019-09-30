@@ -68,6 +68,7 @@
       &.border-left {
         transform: translateX(6vw);
       }
+      /*
       &.border-top {
         transform: translateY(6vw);
       }
@@ -86,6 +87,7 @@
       &.border-bottom.border-right {
         transform: translateX(-6vw) translateY(-6vw);
       }
+      */
     }
   }
 }
