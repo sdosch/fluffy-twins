@@ -389,30 +389,32 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Timeline
-          target={
-            <SplitLetters>
-              <h1>Fluffy Twins</h1>
-            </SplitLetters>
-          }
-        >
-          <Tween
-            staggerFrom={{ y: "-=200px", scale: 1, color: "#0ccac4" }}
-            staggerTo={{ y: "0px", scale: 1, color: "#0ccac4" }}
-            stagger={0.1}
-            duration={2}
-            ease="Bounce.easeOut"
-          />
-          <Tween
-            staggerFrom={{ scale: 1.5, color: "white" }}
-            staggerTo={{ scale: 1 }}
-            stagger={0.1}
-            duration={0.2}
-            cycle={{
-              color: this.state.colors
-            }}
-          />
-        </Timeline>
+        <div className="title-container">
+          <Timeline
+            target={
+              <SplitLetters>
+                <h1>Fluffy Twins</h1>
+              </SplitLetters>
+            }
+          >
+            <Tween
+              staggerFrom={{ y: "-=200px", scale: 1, color: "#0ccac4" }}
+              staggerTo={{ y: "0px", scale: 1, color: "#0ccac4" }}
+              stagger={0.1}
+              duration={2}
+              ease="Bounce.easeOut"
+            />
+            <Tween
+              staggerFrom={{ scale: 1.5, color: "white" }}
+              staggerTo={{ scale: 1 }}
+              stagger={0.1}
+              duration={0.2}
+              cycle={{
+                color: this.state.colors
+              }}
+            />
+          </Timeline>
+        </div>
 
         <TextBox
           text={this.state.textBoxText}
