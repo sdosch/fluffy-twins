@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/fluffy-twins/static/css/main.79e40e88.chunk.css",
+    "main.css": "/fluffy-twins/static/css/main.dad87f5e.chunk.css",
     "main.js": "/fluffy-twins/static/js/main.8818154e.chunk.js",
     "main.js.map": "/fluffy-twins/static/js/main.8818154e.chunk.js.map",
     "runtime-main.js": "/fluffy-twins/static/js/runtime-main.a3df07bd.js",
@@ -8,9 +8,9 @@
     "static/js/2.1ba7b566.chunk.js": "/fluffy-twins/static/js/2.1ba7b566.chunk.js",
     "static/js/2.1ba7b566.chunk.js.map": "/fluffy-twins/static/js/2.1ba7b566.chunk.js.map",
     "index.html": "/fluffy-twins/index.html",
-    "precache-manifest.aa28a4a54de43842b549cf2fe4b9ce9e.js": "/fluffy-twins/precache-manifest.aa28a4a54de43842b549cf2fe4b9ce9e.js",
+    "precache-manifest.7b39751d1f4a52f6d16fd9f13bd3821b.js": "/fluffy-twins/precache-manifest.7b39751d1f4a52f6d16fd9f13bd3821b.js",
     "service-worker.js": "/fluffy-twins/service-worker.js",
-    "static/css/main.79e40e88.chunk.css.map": "/fluffy-twins/static/css/main.79e40e88.chunk.css.map",
+    "static/css/main.dad87f5e.chunk.css.map": "/fluffy-twins/static/css/main.dad87f5e.chunk.css.map",
     "static/media/banner.svg": "/fluffy-twins/static/media/banner.8c35c0f1.svg",
     "static/media/pawprint.svg": "/fluffy-twins/static/media/pawprint.5695bb1a.svg"
   }
