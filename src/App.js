@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.scss";
 import { Tween, Timeline, SplitLetters } from "react-gsap";
-import { Board } from "./components/board/board.component";
+import Board from "./components/board/board.component";
 import { TextBox } from "./components/text-box/text-box.component";
 import { Modal } from "./components/modal/modal.component";
 
@@ -146,12 +146,12 @@ class App extends Component {
         },
         {
           emoji: "🦊",
-          title: "Seroius fox",
+          title: "Serious fox",
           subtitle: "I'm fucking serious"
         },
         {
           emoji: "🎩",
-          title: "Like a sir",
+          title: "Like a Sir",
           subtitle: "It's my pleasure"
         },
         {
@@ -194,7 +194,7 @@ class App extends Component {
   };
 
   hideModal = () => {
-    this.initGame(0);
+    this.initGame(this.state.currentLevel);
   };
 
   shuffle = a => {
@@ -219,6 +219,7 @@ class App extends Component {
       id: index,
       hash: cat.hash,
       flipped: false,
+      zoomed: false,
       locked: false,
       flipCount: 0
     }));
@@ -235,13 +236,14 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.initGame(0);
+    this.initGame(this.state.currentLevel);
   }
 
   handleClick = card => {
     if (!this.state.lockedBoard) {
       const cards = this.state.cards.slice();
       cards[card.id].flipped = true;
+      cards[card.id].zoomed = true;
       cards[card.id].locked = true;
       cards[card.id].flipCount++;
       this.setState({ cards: cards, currentRank: this.getRank() });
@@ -280,10 +282,13 @@ class App extends Component {
       }
 
       const selectedCards = this.state.selectedCards.slice();
+
       selectedCards.push(card);
       this.setState({ selectedCards: selectedCards });
       if (selectedCards.length === 2) {
-        this.setState({ lockedBoard: true });
+        cards[selectedCards[0].id].zoomed = false;
+        this.setState({ lockedBoard: true, cards: cards });
+
         this.checkWin(cards);
       }
     }
@@ -297,7 +302,7 @@ class App extends Component {
       });
       setTimeout(() => {
         const currentLevel = this.state.currentLevel + 1;
-        if (currentLevel > this.state.boards.length - 1) {
+        if (currentLevel < this.state.boards.length - 1) {
           this.showModal();
         } else {
           this.initGame(currentLevel);
@@ -334,6 +339,7 @@ class App extends Component {
       cards[selectedCards[1].id].flipped = false;
       cards[selectedCards[0].id].locked = false;
       cards[selectedCards[1].id].locked = false;
+      cards[selectedCards[1].id].zoomed = false;
 
       let match = cards.filter(card => card.hash === selectedCards[0].hash);
       match.splice(
@@ -357,6 +363,7 @@ class App extends Component {
         textBoxText = this.textResponse(this.state.responseNoMatch);
       }
     }
+    cards[selectedCards[1].id].zoomed = false;
     selectedCards = [];
     this.setState({
       textBoxText: textBoxText,
@@ -413,6 +420,7 @@ class App extends Component {
         <Board
           size={this.state.boards[this.state.currentLevel].cols}
           cards={this.state.cards}
+          level={this.state.currentLevel}
           onClick={card => this.handleClick(card)}
         />
         <Modal
@@ -421,6 +429,11 @@ class App extends Component {
           flopCount={this.state.flopCount}
           stupidCount={this.state.stupidCount}
           rank={this.state.currentRank}
+          rankIndicator={
+            this.state.ranks.findIndex(
+              rank => rank.title === this.state.currentRank.title
+            ) + 1
+          }
           onClick={() => this.hideModal()}
         />
       </div>

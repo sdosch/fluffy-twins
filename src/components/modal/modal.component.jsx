@@ -32,6 +32,10 @@ export const Modal = props => (
         <div className="badge" style={{ backgroundImage: `url(${banner})` }}>
           {props.rank.title}
         </div>
+        <div className="rank-indicator">
+          <small>#</small>
+          {props.rankIndicator}
+        </div>
       </div>
       <p>"{props.rank.subtitle}"</p>
       <ul>

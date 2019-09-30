@@ -54,6 +54,7 @@
         height: 30vw;
         display: flex;
         align-items: center;
+        text-align: center;
         margin: auto;
       }
       .badge {
@@ -68,6 +69,23 @@
         font-size: 6vw;
         font-family: "Big Shoulders Text";
         text-transform: uppercase;
+      }
+      .rank-indicator {
+        position: absolute;
+        top: 2vw;
+        left: 50vw;
+        background-color: black;
+        color: white;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 6vw;
+        height: 6vw;
+        font-size: 3vw;
+        overflow: hidden;
+        border-radius: 15vw;
+        font-family: "Roboto Condensed";
       }
     }
     ul {

@@ -1,13 +1,14 @@
 .flip-card {
+  z-index: 0;
   padding: 0.5vw;
   box-sizing: border-box;
-  perspective: 1000px;
 
   &.flipped {
     .flip-card-inner {
       transform: rotateX(0deg);
     }
   }
+
   .flip-card-inner {
     border: 2px solid #215486;
     box-sizing: border-box;
@@ -17,7 +18,7 @@
     height: 100%;
     transition: transform 0.25s;
     transform-style: preserve-3d;
-    transform: rotateX(180deg);
+    transform: rotateX(180deg) scale(1);
 
     .flip-card-front {
       display: block;
@@ -48,6 +49,42 @@
         opacity: 0.1;
         width: 90%;
         height: 90%;
+      }
+    }
+  }
+}
+
+.level-2 {
+  .flip-card {
+    &.zoomed {
+      z-index: 1;
+      pointer-events: none;
+      .flip-card-inner {
+        transform: scale(2);
+      }
+      &.border-right {
+        transform: translateX(-6vw);
+      }
+      &.border-left {
+        transform: translateX(6vw);
+      }
+      &.border-top {
+        transform: translateY(6vw);
+      }
+      &.border-bottom {
+        transform: translateY(-6vw);
+      }
+      &.border-top.border-left {
+        transform: translateX(6vw) translateY(6vw);
+      }
+      &.border-top.border-right {
+        transform: translateX(-6vw) translateY(6vw);
+      }
+      &.border-bottom.border-left {
+        transform: translateX(6vw) translateY(-6vw);
+      }
+      &.border-bottom.border-right {
+        transform: translateX(-6vw) translateY(-6vw);
       }
     }
   }
