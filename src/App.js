@@ -60,7 +60,7 @@ class App extends Component {
       responseWin: [
         "<span>😻</span> well done!",
         "<span>😻</span> very good! one more, ok?",
-        "<span>😻</span> you did them all!!!"
+        "<span>😻</span> you found them all!!!"
       ],
       responseFoundMe: [
         "<span>👇🏻</span>hey, that's me <span>❤️</span>",
@@ -131,13 +131,18 @@ class App extends Component {
         },
         {
           emoji: "🐘",
-          title: "Dependable elephant",
-          subtitle: "Because elephants never forget"
+          title: "Irrelephant",
+          subtitle: "Because elephants never forget."
         },
         {
-          emoji: "👨🏻‍✈️",
-          title: "Compelled pilot",
-          subtitle: "Trust me, im a pilot"
+          emoji: "🕵🏼",
+          title: "Sherlock Holmes",
+          subtitle: "To a great mind, nothing is little."
+        },
+        {
+          emoji: "🧶",
+          title: "Cute Kitten",
+          subtitle: "I am doing so well, I should be in the game."
         },
         {
           emoji: "🐁",
@@ -160,9 +165,34 @@ class App extends Component {
           subtitle: "Fly like a butterfly, sting like a bee"
         },
         {
+          emoji: "🦉",
+          title: "Midnight hooter",
+          subtitle: "Owl You Need Is Love."
+        },
+        {
+          emoji: "🤖",
+          title: "Awkward robot",
+          subtitle: "I couldn't CAPTCHA ‘em all"
+        },
+        {
+          emoji: "👨🏻‍✈️",
+          title: "Kamikaze pilot",
+          subtitle: "Trust me, I'm an aviator."
+        },
+        {
+          emoji: "🧤",
+          title: "Polar Princess",
+          subtitle: "Cold hands, warm heart"
+        },
+        {
           emoji: "🐙",
           title: "Pitiful octopus",
           subtitle: "I hug ships too hard"
+        },
+        {
+          emoji: "🥙",
+          title: "Badly packed Kebab",
+          subtitle: "Something you don't want."
         },
         {
           emoji: "🐔",
