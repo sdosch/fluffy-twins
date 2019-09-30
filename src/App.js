@@ -194,7 +194,8 @@ class App extends Component {
   };
 
   hideModal = () => {
-    this.initGame(this.state.currentLevel);
+    this.setState({ currentLevel: 0 });
+    this.initGame(0);
   };
 
   shuffle = a => {
