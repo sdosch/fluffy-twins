@@ -192,7 +192,7 @@ class App extends Component {
         {
           emoji: "🥙",
           title: "Badly packed Kebab",
-          subtitle: "Something you don't want."
+          subtitle: "Also with something you didn't want."
         },
         {
           emoji: "🐔",
