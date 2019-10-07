@@ -4,7 +4,7 @@ Fluffy Twins is based a game principle of Memory® by Ravensburger. It is my fir
 
 The project still lacks a lot of React design patterns, how things should be done "right". I am sure I will revisit it at a later learning stage.
 
-## Play it here
+## Play it Here
 
 https://sdosch.github.io/fluffy-twins/
 
