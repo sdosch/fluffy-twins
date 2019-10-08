@@ -17,6 +17,9 @@ class App extends Component {
     this.state = {
       colors: COLOR_DATA,
       boards: BOARD_DATA,
+      responses: RESPONSE_DATA,
+      ranks: RANK_DATA,
+
       lockedBoard: false,
       textBoxText: "",
       textBoxImage: "",
@@ -28,14 +31,6 @@ class App extends Component {
       stupidCount: 0,
       currentLevel: 0,
       showModal: false,
-      responseFoundMe: RESPONSE_DATA.responseFoundMe,
-      responseSeenBefore: RESPONSE_DATA.responseSeenBefore,
-      responseMatch: RESPONSE_DATA.responseMatch,
-      responseLuckyMatch: RESPONSE_DATA.responseLuckyMatch,
-      responseNoMatch: RESPONSE_DATA.responseNoMatch,
-      responseFlopMatch: RESPONSE_DATA.responseFlopMatch,
-      responseStupidMatch: RESPONSE_DATA.responseStupidMatch,
-      ranks: RANK_DATA,
       currentRank: {}
     };
   }
@@ -106,10 +101,10 @@ class App extends Component {
       if (card.id === 0 || cards[0].hash === match[1].hash) {
         this.setState({
           textBoxText:
-            card.flipCount < this.state.responseFoundMe.length
-              ? this.state.responseFoundMe[card.flipCount - 1]
-              : this.state.responseFoundMe[
-                  this.state.responseFoundMe.length - 1
+            card.flipCount < this.state.responses.foundMe.length
+              ? this.state.responses.foundMe[card.flipCount - 1]
+              : this.state.responses.foundMe[
+                  this.state.responses.foundMe.length - 1
                 ]
         });
       }
@@ -117,17 +112,17 @@ class App extends Component {
       switch (card.flipCount) {
         case 3:
           this.setState({
-            textBoxText: this.state.responseSeenBefore[0]
+            textBoxText: this.state.responses.seenBefore[0]
           });
           break;
         case 5:
           this.setState({
-            textBoxText: this.state.responseSeenBefore[1]
+            textBoxText: this.state.responses.seenBefore[1]
           });
           break;
         case 10:
           this.setState({
-            textBoxText: this.state.responseSeenBefore[2]
+            textBoxText: this.state.responses.seenBefore[2]
           });
           break;
         default:
@@ -180,11 +175,11 @@ class App extends Component {
       matchCount += 2;
       //lucky match?
       if (selectedCards[1].flipCount === 1) {
-        textBoxText = this.textResponse(this.state.responseLuckyMatch);
+        textBoxText = this.textResponse(this.state.responses.luckyMatch);
         const luckyMatchCount = this.state.luckyMatchCount + 1;
         this.setState({ luckyMatchCount: luckyMatchCount });
       } else {
-        textBoxText = this.textResponse(this.state.responseMatch);
+        textBoxText = this.textResponse(this.state.responses.match);
       }
     } else {
       cards[selectedCards[0].id].flipped = false;
@@ -201,18 +196,18 @@ class App extends Component {
 
       if (selectedCards[0].flipCount > 3 && selectedCards[1].flipCount > 3) {
         //stupid? player has seen the card as well as the corresponding card more than three times
-        textBoxText = this.textResponse(this.state.responseStupidMatch);
+        textBoxText = this.textResponse(this.state.response.stupidMatch);
 
         const stupidCount = this.state.stupidCount + 1;
         this.setState({ stupidCount: stupidCount });
       } else if (match[0].flipCount > 0) {
         //flop? player has seen the corresponing card before...
-        textBoxText = this.textResponse(this.state.responseFlopMatch);
+        textBoxText = this.textResponse(this.state.responses.flopMatch);
 
         const flopCount = this.state.flopCount + 1;
         this.setState({ flopCount: flopCount });
       } else {
-        textBoxText = this.textResponse(this.state.responseNoMatch);
+        textBoxText = this.textResponse(this.state.responses.noMatch);
       }
     }
     cards[selectedCards[1].id].zoomed = false;

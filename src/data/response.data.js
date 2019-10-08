@@ -1,17 +1,17 @@
 const RESPONSE_DATA = {
-  responseFoundMe: [
+  foundMe: [
     "<span>👇🏻</span>hey, that's me <span>❤️</span>",
     "hee <span>❤️</span>",
     "hello again <span>❤️</span>",
     "i love you too! <span>❤️</span>",
     "<span>❤️</span>"
   ],
-  responseSeenBefore: [
+  seenBefore: [
     "<span>😺</span> 3rd try on this card",
     "<span>😾</span> 5th try on this card!",
     "<span>🙀</span> no match after 9 tries!!!"
   ],
-  responseMatch: [
+  match: [
     "yup <span>👍🏻</span>",
     "<span>💅🏻</span> and that's a match!",
     "<span>😎😎😎</span>",
@@ -26,8 +26,8 @@ const RESPONSE_DATA = {
     "<span>💁🏼</span> exactly.",
     "<span>💁🏼</span> tadaa!"
   ],
-  responseLuckyMatch: ["️️<span>🐥</span> BIRDIE!!! <span>🐥</span>"],
-  responseNoMatch: [
+  luckyMatch: ["️️<span>🐥</span> BIRDIE!!! <span>🐥</span>"],
+  noMatch: [
     "<span>☝🏼</span> fun fact: that was a cat.",
     "<span>🤷🏼‍</span> no we don't look alike.",
     "<span>👬</span> no were not twins.",
@@ -35,14 +35,14 @@ const RESPONSE_DATA = {
     "<span>🌧</span> sorry, no match.",
     "<span>🙇🏻‍</span> no match this time."
   ],
-  responseFlopMatch: [
+  flopMatch: [
     "<span>🥺</span> sorry. wrong.",
     "<span>🧐</span> seen that one before.",
     "<span>🙄</span> well keep on guessing...",
     "<span>😓</span> no. no. no!!!",
     "<span>🤞🏼</span> better luck next time."
   ],
-  responseStupidMatch: [
+  stupidMatch: [
     "<span>😂</span> hahaha... no.",
     "<span>🤢</span>",
     "<span>🤯</span>",
