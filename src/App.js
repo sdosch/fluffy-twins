@@ -5,42 +5,18 @@ import Board from "./components/board/board.component";
 import { TextBox } from "./components/text-box/text-box.component";
 import { Modal } from "./components/modal/modal.component";
 
+import COLOR_DATA from "./data/color.data";
+import BOARD_DATA from "./data/board.data";
+import RESPONSE_DATA from "./data/response.data";
+import RANK_DATA from "./data/rank.data";
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      colors: [
-        "#8dd3c7",
-        "#ffffb3",
-        "#bebada",
-        "#fb8072",
-        "#80b1d3",
-        "#fdb462",
-        "#b3de69",
-        "#fccde5",
-        "#d9d9d9",
-        "#bc80bd",
-        "#ccebc5",
-        "#ffed6f"
-      ],
-      boards: [
-        {
-          name: "small",
-          cols: 2,
-          rows: 2
-        },
-        {
-          name: "medium",
-          cols: 4,
-          rows: 4
-        },
-        {
-          name: "large",
-          cols: 6,
-          rows: 6
-        }
-      ],
+      colors: COLOR_DATA,
+      boards: BOARD_DATA,
       lockedBoard: false,
       textBoxText: "",
       textBoxImage: "",
@@ -52,169 +28,14 @@ class App extends Component {
       stupidCount: 0,
       currentLevel: 0,
       showModal: false,
-      responseStart: [
-        "<span>😺</span> can you find a match?",
-        "<span>😸</span> but can you also solve this?",
-        "<span>😼</span> here's the final challenge!"
-      ],
-      responseWin: [
-        "<span>😻</span> well done!",
-        "<span>😻</span> very good! one more, ok?",
-        "<span>😻</span> you found them all!!!"
-      ],
-      responseFoundMe: [
-        "<span>👇🏻</span>hey, that's me <span>❤️</span>",
-        "hee <span>❤️</span>",
-        "hello again <span>❤️</span>",
-        "i love you too! <span>❤️</span>",
-        "<span>❤️</span>"
-      ],
-      responseSeenBefore: [
-        "<span>😺</span> 3rd try on this card",
-        "<span>😾</span> 5th try on this card!",
-        "<span>🙀</span> no match after 9 tries!!!"
-      ],
-      responseMatch: [
-        "yup <span>👍🏻</span>",
-        "<span>💅🏻</span> and that's a match!",
-        "<span>😎😎😎</span>",
-        "<span>🤘🏻🤘🏻</span>rock'n'roll <span>🤘🏻🤘🏻</span>",
-        "<span>😲</span> you are so gooood!",
-        "<span>🥳</span> got it just right! <span>🥳</span>",
-        "you knew it <span>😜</span>",
-        "jawoll! <span>✊🏻</span>",
-        "<span>🍻</span> cheerio!",
-        "<span>🦄</span> You are so lucky.<span>🌈</span>",
-        "<span>🔔</span> BINGO <span>🔔</span>",
-        "<span>💁🏼</span> exactly.",
-        "<span>💁🏼</span> tadaa!"
-      ],
-      responseLuckyMatch: ["️️<span>🐥</span> BIRDIE!!! <span>🐥</span>"],
-      responseNoMatch: [
-        "<span>☝🏼</span> fun fact: that was a cat.",
-        "<span>🤷🏼‍</span> no we don't look alike.",
-        "<span>👬</span> no were not twins.",
-        "<span>🐯</span> a cat, but wrong one.",
-        "<span>🌧</span> sorry, no match.",
-        "<span>🙇🏻‍</span> no match this time."
-      ],
-      responseFlopMatch: [
-        "<span>🥺</span> sorry. wrong.",
-        "<span>🧐</span> seen that one before.",
-        "<span>🙄</span> well keep on guessing...",
-        "<span>😓</span> no. no. no!!!",
-        "<span>🤞🏼</span> better luck next time."
-      ],
-      responseStupidMatch: [
-        "<span>😂</span> hahaha... no.",
-        "<span>🤢</span>",
-        "<span>🤯</span>",
-        "<span>🤦🏻‍</span>OMG",
-        "🧟‍<span>🧟‍</span> NOOooo! <span>🧟‍</span>🧟‍",
-        "<span>🙈</span>emm... no."
-      ],
-      ranks: [
-        {
-          emoji: "🧠",
-          title: "Braniac",
-          subtitle: "I'm a bot - or a kid, or just super super smart"
-        },
-        {
-          emoji: "👑",
-          title: "King of the castle",
-          subtitle: "Bitch, I'm a king!"
-        },
-        {
-          emoji: "🦖",
-          title: "Godzilla",
-          subtitle: "A God, an alpha predator, Godzilla!"
-        },
-        {
-          emoji: "🐘",
-          title: "Irrelephant",
-          subtitle: "Because elephants never forget"
-        },
-        {
-          emoji: "🕵🏼",
-          title: "Sherlock Holmes",
-          subtitle: "To a great mind, nothing is little"
-        },
-        {
-          emoji: "🧶",
-          title: "Cute Kitten",
-          subtitle: "I am doing so well, I should be in the game"
-        },
-        {
-          emoji: "🐁",
-          title: "Reliable lab rat",
-          subtitle: "I'm doing it only for the science"
-        },
-        {
-          emoji: "🦊",
-          title: "Serious fox",
-          subtitle: "I'm fucking serious"
-        },
-        {
-          emoji: "🎩",
-          title: "Like a Sir",
-          subtitle: "It's my pleasure"
-        },
-        {
-          emoji: "🐝",
-          title: "Busy bee",
-          subtitle: "Fly like a butterfly, sting like a bee"
-        },
-        {
-          emoji: "🥠",
-          title: "Fortune cookie",
-          subtitle: "The fortune you seek is in another cookie"
-        },
-        {
-          emoji: "🤖",
-          title: "Awkward robot",
-          subtitle: "I couldn't CAPTCHA ‘em all"
-        },
-        {
-          emoji: "👨🏻‍✈️",
-          title: "Kamikaze pilot",
-          subtitle: "Trust me, I'm an aviator"
-        },
-        {
-          emoji: "🧤",
-          title: "Polar Princess",
-          subtitle: "Cold hands, warm heart"
-        },
-        {
-          emoji: "🐙",
-          title: "Pitiful octopus",
-          subtitle: "I hug ships too hard"
-        },
-        {
-          emoji: "🥙",
-          title: "Badly packed Kebab",
-          subtitle: "Also with something you didn't want"
-        },
-        {
-          emoji: "🐔",
-          title: "Blind hen",
-          subtitle: "Yes i may occasionally pick up a grain"
-        },
-        {
-          emoji: "🧻",
-          title: "Clueless poop ticket",
-          subtitle: "Just rollin with the homies"
-        },
-        {
-          emoji: "💨",
-          title: "Cabbage fart",
-          subtitle: "Silent but deadly"
-        },
-        {
-          emoji: "🧟‍",
-          title: "Rotten zombie",
-          subtitle: "neeed braaain... neeeed braaaain!1!1!"
-        }
-      ],
+      responseFoundMe: RESPONSE_DATA.responseFoundMe,
+      responseSeenBefore: RESPONSE_DATA.responseSeenBefore,
+      responseMatch: RESPONSE_DATA.responseMatch,
+      responseLuckyMatch: RESPONSE_DATA.responseLuckyMatch,
+      responseNoMatch: RESPONSE_DATA.responseNoMatch,
+      responseFlopMatch: RESPONSE_DATA.responseFlopMatch,
+      responseStupidMatch: RESPONSE_DATA.responseStupidMatch,
+      ranks: RANK_DATA,
       currentRank: {}
     };
   }
@@ -258,7 +79,7 @@ class App extends Component {
       currentLevel: currentLevel,
       cards: cards,
       textBoxImage: cards[0].hash,
-      textBoxText: this.state.responseStart[currentLevel],
+      textBoxText: this.state.boards[currentLevel].responseStart,
       matchCount: 0,
       lockedBoard: false,
       selectedCards: [],
@@ -329,7 +150,7 @@ class App extends Component {
     const matchCount = this.state.matchCount + 2;
     if (matchCount === cards.length) {
       this.setState({
-        textBoxText: this.state.responseWin[this.state.currentLevel]
+        textBoxText: this.state.boards[this.state.currentLevel].responseWin
       });
       setTimeout(() => {
         const currentLevel = this.state.currentLevel + 1;
